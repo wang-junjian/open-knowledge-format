@@ -1,8 +1,8 @@
 ---
 type: Reference
 resource: https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede
-title: Comments ↔ Posts Join
-description: Join path between the comments and posts tables.
+title: 评论 ↔ 帖子连接
+description: comments 表与 posts 表之间的连接路径。
 tags:
 - join
 - comments
@@ -18,14 +18,14 @@ sources:
 
 # comments ↔ posts
 
-Join relationship between the comments and posts (or answers/questions) tables.
+comments 表与 posts（或回答/问题）表之间的连接关系。
 
 ```sql
 ON comments.post_id = posts.id
 ```
 
-## Usage
+## 用法
 
-Use this join path to associate comment content and comment scores directly with the parent post, answer, or question. Useful for calculating comment engagement per post or finding comment threads.
+使用此连接路径将评论内容与评论评分直接关联到其父帖子、回答或问题。适用于计算每个帖子的评论互动量或查找评论串。
 
-[^1]: Verified from [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede) on Meta Stack Exchange.
+[^1]: 经 Meta Stack Exchange 上的 [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede) 核对。

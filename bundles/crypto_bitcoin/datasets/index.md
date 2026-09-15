@@ -1,3 +1,3 @@
 # BigQuery Dataset
 
-* [Bitcoin Blockchain Dataset](crypto_bitcoin.md) - A public Google BigQuery dataset containing the complete transaction ledger and block history of the Bitcoin blockchain.
+* [Bitcoin Blockchain Dataset](crypto_bitcoin.md) - 一个公开的 Google BigQuery 数据集，包含比特币区块链完整的交易账本与区块历史。

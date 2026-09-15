@@ -1,7 +1,7 @@
 ---
 type: Metric
-title: Gross Margin
-description: Gross margin for a period, per Acme's FY2026 Cost Allocation Standard (product cost + inbound fulfillment + outbound shipping + payment fees).
+title: 毛利率
+description: 某期间的毛利率，依据 Acme FY2026 成本分摊标准（商品成本 + 入站履约成本 + 出站运费 + 支付手续费）。
 tags: [finance, margin, headline-metric]
 generated: { by: reference_agent/gemini-2.5-pro, at: 2026-06-30T14:00:00Z }
 verified:
@@ -9,9 +9,9 @@ verified:
 status: stable
 stale_after: 2026-12-31T00:00:00Z
 not:
-  - term: "revenue minus product cost only"
-    why: "that is the pre-FY2026 definition (see gross-margin-legacy). It excluded fulfillment, shipping, and payment fees, and could not be reconciled to the general ledger."
-    instead: "revenue minus full COGS (product cost + inbound fulfillment + outbound shipping + payment fees)"
+  - term: "仅收入减去商品成本"
+    why: "那是 FY2026 之前的定义（见 gross-margin-legacy）。它未包含履约、运费与支付手续费，且无法与总账对账。"
+    instead: "收入减去完整 COGS（商品成本 + 入站履约成本 + 出站运费 + 支付手续费）"
 sources:
   - id: margin-standard
     resource: policies/margin-standard.md
@@ -25,28 +25,28 @@ sources:
     last_modified: 2026-06-15T00:00:00Z
 ---
 
-# Definition
+# 定义
 
-**Not:** revenue minus product cost only (that was the pre-2026 formula; see [`gross-margin-legacy`](./gross-margin-legacy.md)).
+**非（Not）：** 仅收入减去商品成本（那是 2026 年前的公式；见 [`gross-margin-legacy`](./gross-margin-legacy.md)）。
 
-Gross margin for a period equals recognized [Revenue](./revenue.md) minus **full COGS**, where full COGS is the sum of product cost, inbound fulfillment cost, outbound shipping cost, and payment processing fees. [^margin-standard]
+某期间的毛利率等于已确认的[收入](./revenue.md)减去**完整 COGS**，其中完整 COGS 为商品成本、入站履约成本、出站运费与支付手续费之和。[^margin-standard]
 
 ```
 gross_margin(period) = revenue(period) - cogs_full(period)
 ```
 
-The sanctioned computation is [`computations/gross-margin-period.md`](../computations/gross-margin-period.md). Consumers MUST run and attest that computation.
+授权计算逻辑为 [`computations/gross-margin-period.md`](../computations/gross-margin-period.md)。消费方 MUST 运行并认证该计算逻辑。
 
-# What changed in FY2026
+# FY2026 中的变更
 
-Prior to 2026-02-01, Acme's gross-margin definition included only product cost, excluding fulfillment, shipping, and payment fees. That legacy definition is preserved in [`metrics/gross-margin-legacy.md`](./gross-margin-legacy.md) as `status: deprecated` for historical query reproducibility.
+在 2026-02-01 之前，Acme 的毛利率定义仅包含商品成本，不含履约、运费与支付手续费。该旧版定义以 `status: deprecated` 保留于 [`metrics/gross-margin-legacy.md`](./gross-margin-legacy.md)，用于历史查询的可复现性。
 
-The switch reduced reported gross margin by roughly 4-6 percentage points depending on category. It also brought the number in line with the general ledger, closing a long-standing reconciliation gap.
+该切换使报告的毛利率依据品类不同下降约 4–6 个百分点。同时使该数值与总账（general ledger）对齐，弥合了长期存在的对账缺口。
 
-# Trust and freshness
+# 信任与时效
 
-- **Verified:** VP Finance sign-off on 2026-07-01, against the FY2026 margin standard.
-- **Stale after 2026-12-31:** the cost-allocation standard is reviewed annually. Consumers must re-verify against the FY2027 standard before serving.
+- **已校验（Verified）：** 2026-07-01 由 VP Finance 签字确认，依据 FY2026 毛利率标准。
+- **2026-12-31 之后失效：** 成本分摊标准每年审查一次。消费方须在对外提供前依据 FY2027 标准重新校验。
 
 [^margin-standard]: Cost Allocation & Margin Standard (FY2026)
 [^revenue-policy]: Revenue Recognition Policy (FY2026)

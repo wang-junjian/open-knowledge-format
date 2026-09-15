@@ -1,9 +1,8 @@
 ---
 type: BigQuery Table
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/stackoverflow/tables/tags
-title: Tags
-description: Contains information about tags used on Stack Overflow, including their
-  names and usage counts.
+title: 标签
+description: 包含 Stack Overflow 上所用标签的信息，包括其名称和使用次数。
 tags:
 - stackoverflow
 - tags
@@ -20,20 +19,20 @@ sources:
   title: Stack Overflow Website
 ---
 
-The `tags` table in the [stackoverflow](../datasets/stackoverflow.md) dataset provides a comprehensive list of all tags used across Stack Overflow, along with their associated metadata. Each row represents a unique tag, detailing its identifier, name, the number of times it has been used, and references to its excerpt and wiki posts. This table is essential for understanding the categorization of questions and answers within the Stack Overflow community.
+[stackoverflow](../datasets/stackoverflow.md) 数据集中的 `tags` 表提供了 Stack Overflow 上所使用全部标签的综合列表及其关联元数据。每一行代表一个唯一标签，详述其标识符、名称、被使用次数，以及对摘要和 wiki 帖子的引用。该表对于理解 Stack Overflow 社区内问题与回答的分类至关重要。
 
-# Schema
+# 架构
 
-- `id`: Unique identifier for the tag. (INTEGER)
-- `tag_name`: The name of the tag (e.g., 'python', 'java', 'c#'). (STRING)
-- `count`: The total number of times this tag has been used. (INTEGER)
-- `excerpt_post_id`: The ID of the post containing the tag's excerpt description. This can be joined with [posts_tag_wiki_excerpt](posts_tag_wiki_excerpt.md) or [posts_tag_wiki](posts_tag_wiki.md) tables. (INTEGER)
-- `wiki_post_id`: The ID of the post containing the tag's full wiki description. This can be joined with [posts_tag_wiki](posts_tag_wiki.md) table. (INTEGER)
+- `id`: 标签的唯一标识符。(INTEGER)
+- `tag_name`: 标签的名称（如 'python'、'java'、'c#'）。(STRING)
+- `count`: 该标签被使用的总次数。(INTEGER)
+- `excerpt_post_id`: 包含该标签摘要描述的帖子 ID。可与 [posts_tag_wiki_excerpt](posts_tag_wiki_excerpt.md) 或 [posts_tag_wiki](posts_tag_wiki.md) 表连接。(INTEGER)
+- `wiki_post_id`: 包含该标签完整 wiki 描述的帖子 ID。可与 [posts_tag_wiki](posts_tag_wiki.md) 表连接。(INTEGER)
 
-# Common query patterns
+# 常见查询模式
 
 ```sql
--- Retrieve the top 10 most used tags
+-- 检索使用最多的前 10 个标签
 SELECT
     tag_name,
     count
@@ -45,7 +44,7 @@ SELECT
 ```
 
 ```sql
--- Find details for a specific tag
+-- 查找特定标签的详情
 SELECT
     id,
     tag_name,
@@ -59,7 +58,7 @@ SELECT
 ```
 
 ```sql
--- Count total unique tags
+-- 统计唯一标签的总数
 SELECT
     COUNT(DISTINCT tag_name) AS total_unique_tags
   FROM

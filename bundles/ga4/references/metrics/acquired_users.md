@@ -1,9 +1,8 @@
 ---
 type: Reference
 resource: https://support.google.com/analytics/answer/9037342
-title: Acquired Users Metric
-description: Builds an audience of users acquired via a specific Source, Medium, and
-  Campaign name.
+title: 获客用户指标
+description: 构建一个通过特定 Source、Medium 和 Campaign 名称获取的用户的受众。
 tags:
 - metric
 - audience
@@ -18,18 +17,18 @@ sources:
   id: sample_queries
 ---
 
-Builds an audience of Acquired Users, defined as users who were acquired via a specific marketing campaign source, medium, and name.
+构建一个获客用户（Acquired Users）受众，定义为通过特定营销广告系列的 source、medium 和 name 获取的用户。
 
-# Schema
-This reference describes a query pattern and does not map to a single database schema.
+# 结构
+本参考描述了一种查询模式，并不映射到单一的数据库 schema。
 
-# Common query patterns
+# 常见查询模式
 
 ```sql
 /**
- * Builds an audience of Acquired Users.
+ * 构建获客用户受众。
  *
- * Acquired Users = users who were acquired via some Source/Medium/Campaign.
+ * 获客用户 = 通过某个 Source/Medium/Campaign 获取的用户。
  */
  
 SELECT
@@ -44,4 +43,4 @@ WHERE
 ```
 [^sample_queries]
 
-[^sample_queries]: [Google Analytics Help: Sample queries for audiences based on BigQuery data](https://support.google.com/analytics/answer/9037342)
+[^sample_queries]: [Google Analytics 帮助：基于 BigQuery 数据的受众示例查询](https://support.google.com/analytics/answer/9037342)

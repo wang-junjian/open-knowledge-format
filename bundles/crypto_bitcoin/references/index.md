@@ -1,4 +1,4 @@
-# Subdirectories
+# 子目录
 
-* [joins](joins/index.md) - This directory contains join paths linking blocks to transactions and transactions to their corresponding inputs and outputs to trace transaction details.
-* [metrics](metrics/index.md) - An anomaly detection metric to find historical duplicate transactions across different blocks.
+* [joins](joins/index.md) - 该目录包含将区块连接到交易、以及将交易连接到其对应输入与输出的 join 路径，用于追溯交易明细。
+* [metrics](metrics/index.md) - 一个用于查找跨不同区块的历史重复交易的异常检测指标（metric）。

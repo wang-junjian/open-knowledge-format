@@ -1,9 +1,8 @@
 ---
 type: Reference
 resource: https://support.google.com/analytics/answer/9037342
-title: Google Acquired Cohorts Metric
-description: Builds an audience of users acquired in a specific time-window cohort
-  filtered by Google campaign source.
+title: Google 获客同期群指标
+description: 构建一个由 Google 广告系列来源过滤的特定时间窗口同期群中获取的用户的受众。
 tags:
 - metric
 - audience
@@ -18,21 +17,20 @@ sources:
   id: sample_queries
 ---
 
-Builds an audience composed of users acquired last week through Google campaigns (cohorts with specific campaign filters).
+构建一个由上周通过 Google 广告系列获取的、由特定广告系列过滤的同期群（cohorts）用户组成的受众。
 
-# Schema
-This reference describes a query pattern and does not map to a single database schema.
+# 结构
+本参考描述了一种查询模式，并不映射到单一的数据库 schema。
 
-# Common query patterns
+# 常见查询模式
 
 ```sql
 /**
- * Builds an audience composed of users acquired last week
- * through Google campaigns, i.e., cohorts with filters.
+ * 构建一个由上周通过 Google 广告系列获取、
+ * 即带有过滤条件的同期群用户组成的受众。
  *
- * Cohort is defined as users acquired last week, i.e. between 7 - 14
- * days ago. The cohort filter is for users acquired through a direct
- * campaign.
+ * 同期群定义为上周（即 7 - 14 天前）获取的用户。
+ * 同期群过滤条件针对通过直接广告系列获取的用户。
  */
  
 SELECT
@@ -41,15 +39,15 @@ FROM
   `YOUR_TABLE.events_*`
 WHERE
   event_name = 'first_open'
-  -- Cohort: opened app 1-2 weeks ago. One week of cohort, aka. weekly.
+  -- 同期群：1-2 周前打开应用。一周的同期群，即每周。
   AND event_timestamp >
       UNIX_MICROS(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 14 DAY))
   AND event_timestamp <
       UNIX_MICROS(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY))
-  -- Cohort filter: users acquired through 'google' source.
+  -- 同期群过滤：通过 'google' 来源获取的用户。
   AND traffic_source.source = 'google'
   AND _TABLE_SUFFIX BETWEEN '20180501' AND '20240131';
 ```
 [^sample_queries]
 
-[^sample_queries]: [Google Analytics Help: Sample queries for audiences based on BigQuery data](https://support.google.com/analytics/answer/9037342)
+[^sample_queries]: [Google Analytics 帮助：基于 BigQuery 数据的受众示例查询](https://support.google.com/analytics/answer/9037342)

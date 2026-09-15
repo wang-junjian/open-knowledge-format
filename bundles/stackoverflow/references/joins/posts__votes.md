@@ -1,8 +1,8 @@
 ---
 type: Reference
 resource: https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede
-title: Posts ↔ Votes Join
-description: Join path between the votes and posts tables.
+title: 帖子 ↔ 投票连接
+description: votes 表与 posts 表之间的连接路径。
 tags:
 - join
 - posts
@@ -18,14 +18,14 @@ sources:
 
 # posts ↔ votes
 
-Join relationship between the votes table and the posts tables.
+votes 表与 posts 表之间的连接关系。
 
 ```sql
 ON votes.post_id = posts.id
 ```
 
-## Usage
+## 用法
 
-Use this join path to associate individual votes, flags, and favorites with their target posts (questions, answers, or moderator nominations).
+使用此连接路径将各项投票、标记和收藏关联到其目标帖子（问题、回答或版主提名）。
 
-[^1]: Verified from [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede) on Meta Stack Exchange.
+[^1]: 经 Meta Stack Exchange 上的 [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede) 核对。

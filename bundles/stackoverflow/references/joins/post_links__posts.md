@@ -1,8 +1,8 @@
 ---
 type: Reference
 resource: https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede
-title: Post Links ↔ Posts Join
-description: Join path between the post_links and posts tables.
+title: 帖子链接 ↔ 帖子连接
+description: post_links 表与 posts 表之间的连接路径。
 tags:
 - join
 - posts
@@ -18,14 +18,14 @@ sources:
 
 # post_links ↔ posts
 
-Join relationship between the post links table and target/source posts.
+post_links 表与目标/源帖子之间的连接关系。
 
 ```sql
 ON post_links.post_id = posts.id
 ```
 
-## Usage
+## 用法
 
-Use this join path to resolve metadata for the source post (`post_id`) or targets (`related_post_id`) in a link/duplicate relationship.
+使用此连接路径来解析链接/重复关系中的源帖子（`post_id`）或目标（`related_post_id`）的元数据。
 
-[^1]: Verified from [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede) on Meta Stack Exchange.
+[^1]: 经 Meta Stack Exchange 上的 [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede) 核对。

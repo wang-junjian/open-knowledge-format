@@ -1,9 +1,8 @@
 ---
 type: Reference
 resource: https://support.google.com/analytics/answer/9037342
-title: Highly Active Users Metric
-description: Builds an audience of users active for more than N minutes in the last
-  M days.
+title: 高度活跃用户指标
+description: 构建一个在最近 M 天中活跃/互动超过 N 分钟的用户的受众。
 tags:
 - metric
 - audience
@@ -18,19 +17,18 @@ sources:
   id: sample_queries
 ---
 
-Builds an audience of Highly Active Users, defined as users who have been active/engaged for more than N minutes in the last M days, where M > N (for example, more than 0.1 minutes in the last 10 days).
+构建一个高度活跃用户（Highly Active Users）受众，定义为在最近 M 天中活跃/互动超过 N 分钟的用户，其中 M > N（例如：在最近 10 天中超过 0.1 分钟）。
 
-# Schema
-This reference describes a query pattern and does not map to a single database schema.
+# 结构
+本参考描述了一种查询模式，并不映射到单一的数据库 schema。
 
-# Common query patterns
+# 常见查询模式
 
 ```sql
 /**
- * Builds an audience of Highly Active Users.
+ * 构建高度活跃用户受众。
  *
- * Highly Active Users = users who have been active for more than N minutes
- * in the last M days where M > N.
+ * 高度活跃用户 = 在最近 M 天（M > N）中活跃超过 N 分钟的用户。
 */
 
 SELECT
@@ -46,17 +44,17 @@ FROM
     CROSS JOIN
       T.event_params
     WHERE
-      -- User engagement in the last M = 10 days.
+      -- 最近 M = 10 天的用户互动。
       event_timestamp >
           UNIX_MICROS(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 10 DAY))
       AND event_params.key = 'engagement_time_msec'
       AND _TABLE_SUFFIX BETWEEN '20180521' AND '20240131'
     GROUP BY 1, 2
     HAVING
-      -- Having engaged for more than N = 0.1 minutes.
+      -- 互动时长超过 N = 0.1 分钟。
       SUM(event_params.value.int_value) > 0.1 * 60 * 1000000
   );
 ```
 [^sample_queries]
 
-[^sample_queries]: [Google Analytics Help: Sample queries for audiences based on BigQuery data](https://support.google.com/analytics/answer/9037342)
+[^sample_queries]: [Google Analytics 帮助：基于 BigQuery 数据的受众示例查询](https://support.google.com/analytics/answer/9037342)

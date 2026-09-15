@@ -1,7 +1,7 @@
 ---
 type: Attested Computation
-title: Revenue for a fiscal year
-description: Sanctioned SQL that produces the recognized-revenue figure for a given fiscal year, per Acme's FY2026 Revenue Recognition Policy.
+title: 某一财年的收入
+description: 依据 Acme FY2026 收入确认策略，生成指定财年已确认收入数值的授权 SQL。
 tags: [finance, revenue, attested]
 runtime: bigquery
 parameters:
@@ -48,24 +48,24 @@ WHERE o.order_status = 'delivered'
   AND EXTRACT(YEAR FROM o.order_ts) = @year
 ```
 
-This computation implements the four rules of the FY2026 Revenue Recognition Policy: [^revenue-policy]
+本计算逻辑实现了 FY2026 收入确认策略的四条规则：[^revenue-policy]
 
-1. **Recognition trigger:** `order_status = 'delivered'` AND the 30-day return window has closed.
-2. **Recognized amount:** `net_amount` (excludes shipping and tax).
-3. **Currency:** non-USD orders convert at the `order_ts` daily rate.
-4. **Fiscal year:** calendar year from `order_ts`.
+1. **确认触发条件（Recognition trigger）：** `order_status = 'delivered'` 且 30 天退货窗口已关闭。
+2. **确认金额（Recognized amount）：** `net_amount`（不含运费与税）。
+3. **币种（Currency）：** 非 USD 订单按 `order_ts` 当日汇率换算。
+4. **财年（Fiscal year）：** 取自 `order_ts` 的日历年。
 
-# What the attester checks
+# 校验器（attester）检查的内容
 
-`attesters/sql_equality.py` receives the receipt returned by `skills/run-on-bq.md` and verifies two things:
+`attesters/sql_equality.py` 接收 `skills/run-on-bq.md` 返回的回执，并校验两项内容：
 
-1. **Provenance:** `receipt.executed_sql`, canonicalized (whitespace, comment stripping, keyword casing), equals the SQL above canonicalized the same way. Any rewrite (a swapped table, an added filter, a dropped JOIN) fails the check.
-2. **Fidelity:** the value the caller is about to display equals `receipt.result[0]`.
+1. **来源溯源（Provenance）：** `receipt.executed_sql` 经规范化（去空白、去除注释、关键字大小写统一）后，须与上方 SQL 以相同方式规范化的结果相等。任何改写（替换表、新增过滤条件、丢弃 JOIN）都将导致校验失败。
+2. **保真度（Fidelity）：** 调用方即将展示的数值须等于 `receipt.result[0]`。
 
-A run whose SQL does not match is treated as unattested; the consumer MUST refuse to display the value.
+SQL 不匹配的运行被视为未经认证（unattested）；消费方 MUST 拒绝展示该数值。
 
-# Freshness
+# 时效（Freshness）
 
-`stale_after: 2026-12-31T00:00:00Z` mirrors the revenue-recognition policy's annual review cycle. On 2027-01-01, a consumer running this computation SHOULD flag the result for re-verification before serving it, per the memory-aware consumer contract.
+`stale_after: 2026-12-31T00:00:00Z` 与收入确认策略的年度审查周期一致。按具备记忆感知的消费方契约，在 2027-01-01，运行此计算的消费方 SHOULD 在对外提供结果前，将其标记需重新校验。
 
 [^revenue-policy]: Revenue Recognition Policy (FY2026)

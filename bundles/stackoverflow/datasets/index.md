@@ -1,3 +1,3 @@
-# BigQuery Dataset
+# BigQuery 数据集
 
-* [Stack Overflow Public Dataset](stackoverflow.md) - This dataset contains a public archive of Stack Overflow data, including posts, users, and tags. It was last updated on 2022-11-25 and is no longer actively updated.
+* [Stack Overflow 公开数据集](stackoverflow.md) - 该数据集包含 Stack Overflow 数据的公开存档，包括帖子、用户和标签。最后更新于 2022-11-25，已不再主动更新。

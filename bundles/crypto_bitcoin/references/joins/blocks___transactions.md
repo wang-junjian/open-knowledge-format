@@ -1,9 +1,8 @@
 ---
 type: Reference
 resource: https://github.com/blockchain-etl/bitcoin-etl
-title: Blocks to Transactions Join Path
-description: Join relationship linking blocks to their corresponding transactions
-  by block height / block number.
+title: 区块到交易的 Join Path
+description: 通过区块高度 / 区块号将区块关联到其对应交易的 join 关系。
 tags:
 - join
 - bitcoin
@@ -16,7 +15,7 @@ sources:
   title: Bitcoin ETL Parser
 ---
 
-This join path represents the link between a block and all the transactions included in that block. This is useful for analyzing block density, mining fee shares, and validating transaction confirmation times relative to block production.
+该 join 路径表示区块与其中包含的所有交易之间的关联。它有助于分析区块密度、挖矿手续费占比，并验证相对于区块生产时间的交易确认耗时。
 
 ```sql
 SELECT

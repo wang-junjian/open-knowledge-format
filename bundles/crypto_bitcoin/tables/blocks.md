@@ -1,9 +1,8 @@
 ---
 type: BigQuery Table
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/crypto_bitcoin/tables/blocks
-title: Bitcoin Blocks Table
-description: All blocks from the Bitcoin blockchain, including block headers, transaction
-  counts, sizes, and timestamps.
+title: 比特币区块表
+description: 比特币区块链的全部区块，包含区块头、交易数量、大小与时间戳。
 tags:
 - bitcoin
 - blockchain
@@ -20,34 +19,34 @@ sources:
   title: BIP-141 Segregated Witness (Consensus layer)
 ---
 
-The `blocks` table contains structured records for every block in the Bitcoin blockchain [^bitcoin-etl]. Each row in this table represents a single block, captured with detailed block header attributes such as hash, size, transaction count, nonce, difficulty bits, and the Merkle root of all transactions contained within that block.
+`blocks` 表包含比特币区块链中每个区块的结构化记录 [^bitcoin-etl]。该表的每一行代表一个区块，记录了详细的区块头属性，如哈希、大小、交易数量、nonce、难度位（difficulty bits）以及该区块内所有交易的默克尔根（Merkle root）。
 
-The dataset is continually exported from live nodes and represents a complete historical index of Bitcoin blocks starting from the genesis block in January 2009. The table is partitioned by month using the `timestamp_month` column to optimize query performance and lower data scanning costs when filtering blocks by date.
+该数据集持续从活跃节点导出，代表自 2009 年 1 月创世区块起的比特币区块完整历史索引。该表按 `timestamp_month` 列做按月分区，以优化按日期筛选区块时的查询性能并降低数据扫描成本。
 
-The table can be joined with [transactions](transactions.md) to drill down into individual payments or to aggregate block-level statistics like total transaction fees, transaction densities, and witness data weights.
+该表可与 [transactions](transactions.md) 做 join，下钻到单笔支付，或聚合区块级统计，如总交易手续费、交易密度与见证数据权重。
 
-# Schema
+# 表结构（Schema）
 
 | Field Name | Type | Mode | Description |
 | :--- | :--- | :--- | :--- |
-| **hash** | STRING | REQUIRED | Unique block hash that identifies the block. |
-| **size** | INTEGER | NULLABLE | Total size of the block data in bytes. |
-| **stripped_size** | INTEGER | NULLABLE | The size of block data in bytes excluding witness data. |
-| **weight** | INTEGER | NULLABLE | Three times the base size plus the total size as defined in BIP-141 [^bip-141]. |
-| **number** | INTEGER | REQUIRED | The sequential height of the block. |
-| **version** | INTEGER | NULLABLE | Protocol version specified in the block header. |
-| **merkle_root** | STRING | NULLABLE | The root node of a Merkle tree, where leaves are transaction hashes. |
-| **timestamp** | TIMESTAMP | REQUIRED | Block creation timestamp specified in the block header. |
-| **timestamp_month** | DATE | REQUIRED | Month of the block creation timestamp (used as the partitioning key). |
-| **nonce** | STRING | NULLABLE | Difficulty solution specified in the block header. |
-| **bits** | STRING | NULLABLE | Difficulty threshold specified in the block header. |
-| **coinbase_param** | STRING | NULLABLE | Data specified in the coinbase transaction of this block. |
-| **transaction_count** | INTEGER | NULLABLE | Number of transactions included in this block. |
+| **hash** | STRING | REQUIRED | 唯一标识该区块的区块哈希。 |
+| **size** | INTEGER | NULLABLE | 区块数据的总大小（字节）。 |
+| **stripped_size** | INTEGER | NULLABLE | 排除见证数据（witness data）后区块数据的大小（字节）。 |
+| **weight** | INTEGER | NULLABLE | 依据 BIP-141 [^bip-141] 定义的“基础大小的三倍加上总大小”。 |
+| **number** | INTEGER | REQUIRED | 区块的连续高度（序号）。 |
+| **version** | INTEGER | NULLABLE | 区块头中指定的协议版本。 |
+| **merkle_root** | STRING | NULLABLE | 默克尔树（Merkle tree）的根节点，其叶子为交易哈希。 |
+| **timestamp** | TIMESTAMP | REQUIRED | 区块头中指定的区块创建时间戳。 |
+| **timestamp_month** | DATE | REQUIRED | 区块创建时间戳的月份（用作分区键）。 |
+| **nonce** | STRING | NULLABLE | 区块头中指定的难度解。 |
+| **bits** | STRING | NULLABLE | 区块头中指定的难度阈值。 |
+| **coinbase_param** | STRING | NULLABLE | 本区块 coinbase 交易中指定的数据。 |
+| **transaction_count** | INTEGER | NULLABLE | 本区块包含的交易数量。 |
 
-# Common query patterns
+# 常见查询模式（Common query patterns）
 
-### 1. Daily block counts and average transactions per block
-Find out how many blocks are mined each day and the average number of transactions per block for a specific month.
+### 1. 每日区块数量与每块平均交易数
+了解每天挖出多少区块，以及特定月份每块的平均交易数。
 
 ```sql
 SELECT
@@ -65,8 +64,8 @@ ORDER BY
   block_date ASC;
 ```
 
-### 2. Retrieve details for a specific block height
-Lookup a single block's metadata and structure using its height number.
+### 2. 检索特定区块高度的详情
+使用高度编号查询单个区块的元数据与结构。
 
 ```sql
 SELECT
@@ -83,8 +82,8 @@ WHERE
   number = 800000;
 ```
 
-### 3. Calculate monthly average block size and weight
-Analyze the adoption and impact of SegWit over time by analyzing the trends in block size, stripped size, and SegWit weight [^bip-141].
+### 3. 计算月度平均区块大小与权重
+通过分析区块大小、剥离大小（stripped size）与 SegWit 权重的趋势，分析 SegWit 随时间的采用与影响 [^bip-141]。
 
 ```sql
 SELECT
@@ -103,9 +102,9 @@ ORDER BY
   timestamp_month DESC;
 ```
 
-# Joins
+# 关联（Joins）
 
-- [transactions](../references/joins/blocks___transactions.md) — Connects blocks to all included transactions to trace block validation times, miner fee revenue, or transaction densities.
+- [transactions](../references/joins/blocks___transactions.md) — 将区块关联到其包含的全部交易，用于追溯区块验证耗时、矿工手续费收入或交易密度。
 
 [^bitcoin-etl]: https://github.com/blockchain-etl/bitcoin-etl
 [^bip-141]: https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki

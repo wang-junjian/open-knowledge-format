@@ -1,8 +1,8 @@
 ---
 type: Reference
 resource: https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede
-title: Posts Answers ↔ Posts Questions Join
-description: Join path between posts_answers and posts_questions tables.
+title: 帖子回答 ↔ 帖子问题连接
+description: posts_answers 表与 posts_questions 表之间的连接路径。
 tags:
 - join
 - posts
@@ -19,14 +19,14 @@ sources:
 
 # posts_answers ↔ posts_questions
 
-Join relationship between Stack Overflow questions and their answers.
+Stack Overflow 问题与它们的回答之间的连接关系。
 
 ```sql
 ON posts_answers.parent_id = posts_questions.id
 ```
 
-## Usage
+## 用法
 
-Use this join path to correlate answers directly back to their parent questions to aggregate answer counts, verify metrics like Accepted Answer rate, or compare question/answer scores.
+使用此连接路径将回答直接关联回其父问题，以汇总回答数量、验证采纳回答率等指标，或比较问题/回答的评分。
 
-[^1]: Verified from [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede) on Meta Stack Exchange.
+[^1]: 经 Meta Stack Exchange 上的 [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede) 核对。

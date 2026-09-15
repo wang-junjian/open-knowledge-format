@@ -1,43 +1,43 @@
-# Contributing
+# 贡献指南
 
-Thanks for your interest in contributing to the Open Knowledge Format (OKF)!
+感谢你有兴趣为 Open Knowledge Format（OKF）
+做出贡献！
 
-Contributions generally fall into two categories, and they are reviewed
-differently:
+贡献一般分为两类，
+审核方式有所不同：
 
-- **The format itself** ([`SPEC.md`](SPEC.md)) — OKF aims to be a universal,
-  vendor-neutral format, so spec changes are held to a higher bar. Open an
-  issue describing the problem and the proposed change before sending a pull
-  request, so the design can be discussed first.
-- **The reference agent, viewer, samples, and bundles** — proof-of-concept
-  tooling that demonstrates producing and consuming OKF. Ordinary pull
-  requests are welcome.
+- **格式本身**（[`SPEC.md`](SPEC.md)）—— OKF 的目标是成为一种通用、
+  厂商中立的格式，因此规范改动的标准更高。在提交 pull request 之前，
+  请先开一个 issue 说明问题以及拟议的改动，以便先就设计展开讨论。
+- **参考 agent、查看器、样例与 bundle** —— 用于演示如何生成与消费
+  OKF 的概念验证工具。欢迎提交普通的 pull request。
 
-To get started contributing:
+开始贡献的
+步骤：
 
-1. Sign a Contributor License Agreement (see details below).
-1. Fork the repo, develop and test your code changes.
-1. Ensure that your code adheres to the existing style.
-1. Ensure that your code has an appropriate set of unit tests which all pass.
-1. Ensure that all tests pass by running `.venv/bin/pytest` (see
-   [README.md](README.md) for environment setup).
-1. Submit a pull request.
+1. 签署贡献者许可协议
+   （详见下文）。
+1. Fork 本仓库，
+   开发并测试你的代码改动。
+1. 确保你的代码
+   符合现有的代码风格。
+1. 确保你的代码包含一组适当的单元测试且全部通过。
+1. 通过运行 `.venv/bin/pytest` 确保所有测试通过（环境配置
+   参见 [README.md](README.md)）。
+1. 提交一个 pull request。
 
-## Contributor License Agreement
+## 贡献者许可协议
 
-Contributions to this project must be accompanied by a Contributor License
-Agreement. You (or your employer) retain the copyright to your contribution;
-this simply gives us permission to use and redistribute your contributions as
-part of the project. Head over to <https://cla.developers.google.com/> to see
-your current agreements on file or to sign a new one.
+对本项目的贡献必须随附一份贡献者许可协议（Contributor License
+Agreement）。你（或你的雇主）保留所贡献内容的版权；该协议只是
+授予我们将你的贡献作为项目的一部分使用并再分发的许可。前往
+<https://cla.developers.google.com/> 可查看你已签署的文件或签署新协议。
 
-You generally only need to submit a CLA once, so if you've already submitted one
-(even if it was for a different project), you probably don't need to do it
-again.
+通常你只需提交一次 CLA 即可，因此如果你此前已经提交过（即使是为
+另一个项目提交的），大概率无需再次提交。
 
-## Code reviews
+## 代码评审
 
-All submissions, including submissions by project members, require review. We
-use GitHub pull requests for this purpose. Consult
-[GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
-information on using pull requests.
+所有提交，包括项目成员的提交，都需要经过评审。我们
+使用 GitHub 的 pull request 来进行评审。如需了解如何使用
+pull request，请参阅 [GitHub Help](https://help.github.com/articles/about-pull-requests/)。

@@ -1,17 +1,19 @@
-# Publishing an OKF bundle to Google Cloud Knowledge Catalog
+# 将 OKF bundle 发布到 Google Cloud Knowledge Catalog
 
-Push an OKF bundle into a [Knowledge Catalog][kc] EntryGroup and pull it back as
-clean OKF, using **`kcmd`** from [`toolbox/mdcode`][mdcode].
+把一个 OKF bundle 推送到 [Knowledge Catalog][kc] 的 EntryGroup，
+再以干净的 OKF 拉取回来，
+使用的工具是来自 [`toolbox/mdcode`][mdcode] 的 **`kcmd`**。
 
-Read [Limitations](#limitations) first.
+请先阅读 [限制](#limitations)。
 
 [kc]: https://docs.cloud.google.com/dataplex/docs/catalog-overview
 [mdcode]: https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/toolbox/mdcode
 [demo]: https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/toolbox/mdcode/demo/okf
 
-## Prerequisites
+## 前置条件
 
-A GCP project with the Dataplex API enabled, `gcloud`, and [Bun](https://bun.sh).
+一个已启用 Dataplex API 的 GCP 项目，
+并安装 `gcloud` 与 [Bun](https://bun.sh)。
 
 ```bash
 gcloud auth application-default login
@@ -19,118 +21,116 @@ gcloud config set project <your-project-id>
 gcloud config set compute/region us-central1
 ```
 
-Set both. `kcmd` reads project and location from `gcloud config`; there is no
-flag and no environment variable.
+两项都要设置。
+`kcmd` 从 `gcloud config` 读取项目与位置；既无对应 flag，也无环境变量。
 
-Build the CLI:
+构建 CLI：
 
 ```bash
 git clone https://github.com/GoogleCloudPlatform/knowledge-catalog
 cd knowledge-catalog/toolbox/mdcode
-npm install && npm run build      # produces dist/kcmd
+npm install && npm run build      # 生成 dist/kcmd
 ```
 
-## 1. Run the demo
+## 1. 运行示例
 
-Confirms the environment before you change anything.
+在改动任何内容之前，
+先确认环境正常。
 
 ```bash
 cd demo/okf
 bun setup.ts && bun push.ts && bun pull.ts
-git diff --exit-code catalog/     # should be empty
+git diff --exit-code catalog/     # 应当为空
 bun cleanup.ts
 ```
 
-## 2. Copy the connector
+## 2. 复制连接器
 
-Copy everything in [`demo/okf`][demo] except `catalog/` into your own directory,
-then edit:
+把 [`demo/okf`][demo] 中除 `catalog/` 以外的所有内容复制到你的目录，
+然后编辑：
 
-- `entryGroup` in `setup.ts` and `cleanup.ts` — hardcoded to `okf_ga4`.
-- `path.resolve(root, '../../dist/kcmd')` in `push.ts` and `pull.ts`, if your
-  directory is not two levels below `toolbox/mdcode`. Those two also
-  `import * as kcmd from 'kcmd'`, so keep that module resolvable.
+- `setup.ts` 与 `cleanup.ts` 中的 `entryGroup` ——
+  硬编码为 `okf_ga4`。
+- `push.ts` 与 `pull.ts` 中的 `path.resolve(root, '../../dist/kcmd')`，前提是你
+  的目录不在 `toolbox/mdcode` 下两层。这两个文件也 `import * as kcmd from 'kcmd'`，
+  因此请保持该模块可被解析。
 
-Add `.staging/` and `catalog.yaml` to `.gitignore`.
+把 `.staging/` 与 `catalog.yaml` 加入 `.gitignore`。
 
-## 3. Set up the catalog side
+## 3. 配置目录一侧
 
-Creates the EntryGroup, the custom `okf` aspect type, and `catalog.yaml`.
-Re-running is safe.
+创建 EntryGroup、自定义的 `okf` aspect 类型，以及 `catalog.yaml`。
+重复运行是安全的。
 
 ```bash
 bun setup.ts
 ```
 
-## 4. Add your bundle
+## 4. 添加你的 bundle
 
 ```bash
 cp -R /path/to/bundle/. catalog/
 ```
 
-## 5. Push
+## 5. 推送
 
 ```bash
 bun push.ts
 ```
 
-## 6. Verify the round-trip
+## 6. 验证往返一致性
 
 ```bash
 bun pull.ts
-git diff catalog/                 # first pull: YAML normalization
+git diff catalog/                 # 首次拉取：YAML 规范化
 git add catalog/ && bun pull.ts
-git diff --exit-code catalog/     # now clean
+git diff --exit-code catalog/     # 此刻应干净
 ```
 
-The first pull rewrites every frontmatter block into `kcmd`'s YAML style —
-sequences indented, timestamps unquoted, mapping keys reordered, lines
-rewrapped at a different width. No values change. Commit that normalization
-once and later pulls are byte-identical, which is what makes `--exit-code`
-worth running. The demo skips this only because its `catalog/` was generated
-by a pull already.
+首次拉取会把每个 frontmatter 块改写成 `kcmd` 的 YAML 风格 ——
+序列缩进、
+时间戳去引号、映射键重排、行宽重新折行。值不会变化。把这次规范化提交一次，
+之后的拉取便逐字节一致，这正是 `--exit-code` 值得运行的原因。
+示例之所以跳过这步，
+只是因为它的 `catalog/` 本来就由一次拉取生成。
 
-Two content diffs are also expected and are not translation loss:
+还有两类内容差异是预期内的，
+不属于转换损耗：
 
-- Directories without an `index.md` gain one — `kcmd` synthesizes an `index`
-  entry for every directory.
-- A document with `resource:` and no `title:` comes back with `title:` set to
-  the resource URI.
+- 没有 `index.md` 的目录会多出一个 —— `kcmd` 会为每个目录合成一个 `index` 条目。
+- 带有 `resource:` 却没有 `title:` 的文档，拉取回来时 `title:` 会被设为资源 URI。
 
-Any other diff is a key the translation doesn't carry. See
-[Limitations](#limitations).
+任何其他差异都是转换未能携带的键。参见 [限制](#limitations)。
 
-## 7. Clean up
+## 7. 清理
 
-Deletes the EntryGroup. The `okf` aspect type is left in place — it is scoped
-to the project, not to your EntryGroup, so every OKF bundle in the project
-shares one. `cleanup.ts` prints the command to remove it once nothing else
-needs it.
+删除 EntryGroup。`okf` aspect 类型会原样保留 ——
+它的作用域是项目而非你的
+EntryGroup，因此项目内的每个 OKF bundle 共享同一个。当不再需要时，`cleanup.ts`
+会打印出移除它的命令。
 
 ```bash
 bun cleanup.ts
 ```
 
-## Limitations
+## 限制
 
-- **Seven frontmatter keys are carried**, plus the markdown body. `title`,
-  `description` and `tags` become native entry fields, `resource` becomes
-  `catalogEntry.resource.name`, and `type`, `generated` and `sources` go on the
-  `okf` aspect. To carry more, add fields to `okf-aspect.json` and `okf.ts`,
-  keeping existing `index` values stable.
-- **Only `.md` files are carried.** Anything else in the bundle — images, HTML,
-  CSV — is ignored in both directions: never pushed, and left alone on pull.
-- **Cross-links resolve to nothing.** Relative paths (§6.1) are stored verbatim.
-  Don't rewrite them in your source — the relative form is what renders on
-  GitHub.
-- **Tags become entry labels set to `"true"`**, and only labels with that exact
-  value are read back as tags. Dataplex caps label keys at 128 characters.
-- **Renames orphan catalog state, deletes leave entries behind**, and there is
-  no merge story. Treat git as authoritative: push on merge, don't pull into a
-  tracked bundle.
-- **No entry-level access control.** Anyone with a basic role on the project can
-  read and bulk-export the EntryGroup — `roles/viewer` is a strict superset of
-  `roles/dataplex.catalogViewer` and adds `entryGroups.export`. Not public by
-  default, but check what your bundle discloses before pushing.
-- **Scale is untested** beyond the 14-file demo. Push is per-file, and Dataplex
-  enforces quotas.
+- **会携带七个 frontmatter 键**，外加 markdown 正文。`title`、`description`
+  与 `tags` 变为原生的 entry 字段，`resource` 变为
+  `catalogEntry.resource.name`，而 `type`、`generated` 与 `sources` 挂在
+  `okf` aspect 上。若要携带更多，请向 `okf-aspect.json` 与 `okf.ts`
+  添加字段，并保持既有 `index` 值不变。
+- **只携带 `.md` 文件。** bundle 中的其他任何内容 —— 图片、HTML、
+  CSV —— 在双向传输中都会被忽略：既不推送，拉取时也不动。
+- **交叉链接解析不到任何目标。** 相对路径（§6.1）会原样存储。
+  不要在源文件中改写它们 —— 相对形式才是 GitHub 上渲染出来的样子。
+- **标签会变成设为 `"true"` 的 entry 标签**，且只有取值恰好为该值的标签
+  会被读回成标签。Dataplex 将标签键的长度上限设为 128 个字符。
+- **重命名会让目录状态变成孤儿，删除会留下残留条目**，而且没有合并方案。
+  以 git 为准：合并时再推送，不要往受跟踪的 bundle 里拉取。
+- **没有条目级访问控制。** 项目上任何拥有基础角色的人都能读取并批量导出
+  EntryGroup —— `roles/viewer` 是 `roles/dataplex.catalogViewer` 的严格超集，
+  并额外增加了 `entryGroups.export`。默认不公开，但推送前请先确认你的
+  bundle 会暴露什么。
+- **规模未经测试**，仅验证过 14 个文件的示例。推送按文件进行，且 Dataplex
+  会强制执行配额。

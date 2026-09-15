@@ -1,10 +1,9 @@
 ---
 type: BigQuery Dataset
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/stackoverflow
-title: Stack Overflow Public Dataset
-description: This dataset contains a public archive of Stack Overflow data, including
-  posts, users, and tags. It was last updated on 2022-11-25 and is no longer actively
-  updated.
+title: Stack Overflow 公开数据集
+description: 该数据集包含 Stack Overflow 数据的公开存档，包括帖子、用户和标签。最后更新于
+  2022-11-25，已不再主动更新。
 tags: Stack Overflow, Q&A, developer, programming, public dataset
 generated:
   by: reference_agent/gemini-2.5-flash
@@ -15,30 +14,32 @@ sources:
   id: stackoverflow-dataset-resource
 ---
 
-The `stackoverflow` dataset, hosted in BigQuery's public data program, provides a comprehensive archive of Stack Overflow's community-generated content. It includes information on questions, answers, comments, users, badges, and tags, offering a rich resource for analyzing developer activity, programming trends, and community dynamics. The data was last updated on 2022-11-25 and is no longer actively updated by its original source. It is located in the `US` multi-region.
+`stackoverflow` 数据集托管于 BigQuery 公开数据计划，提供 Stack Overflow 社区生成内容的完整存档。它包含问题、回答、评论、用户、徽章和标签的信息，是分析开发者活动、编程趋势和社区动态的丰富资源。该数据最后更新于 2022-11-25，其原始来源已不再主动更新。它位于 `US` 多区域。
 
-# Schema
-This dataset contains the following tables:
+# 架构
 
-*   [`badges`](../tables/badges.md): Information about badges awarded to users.
-*   [`comments`](../tables/comments.md): User-submitted comments on posts.
-*   [`post_history`](../tables/post_history.md): Historical revisions and events for posts.
-*   [`post_links`](../tables/post_links.md): Links between posts.
-*   [`posts_answers`](../tables/posts_answers.md): Answers to questions.
-*   [`posts_moderator_nomination`](../tables/posts_moderator_nomination.md): Posts related to moderator nominations.
-*   [`posts_orphaned_tag_wiki`](../tables/posts_orphaned_tag_wiki.md): Orphaned tag wiki posts.
-*   [`posts_privilege_wiki`](../tables/posts_privilege_wiki.md): Privilege wiki posts.
-*   [`posts_questions`](../tables/posts_questions.md): User-submitted questions.
-*   [`posts_tag_wiki`](../tables/posts_tag_wiki.md): Tag wiki entries.
-*   [`posts_tag_wiki_excerpt`](../tables/posts_tag_wiki_excerpt.md): Excerpts from tag wiki entries.
-*   [`posts_wiki_placeholder`](../tables/posts_wiki_placeholder.md): Placeholder posts for wiki content.
-*   [`stackoverflow_posts`](../tables/stackoverflow_posts.md): A consolidated view of all posts (questions and answers).
-*   [`tags`](../tables/tags.md): Information about tags used on Stack Overflow.
-*   [`users`](../tables/users.md): User profiles and statistics.
-*   [`votes`](../tables/votes.md): Records of votes on posts.
+本数据集包含以下表：
 
-# Common query patterns
-To explore the tables within this dataset:
+*   [`badges`](../tables/badges.md)：授予用户的徽章信息。
+*   [`comments`](../tables/comments.md)：用户对帖子的评论。
+*   [`post_history`](../tables/post_history.md)：帖子的历史修订与事件。
+*   [`post_links`](../tables/post_links.md)：帖子之间的链接。
+*   [`posts_answers`](../tables/posts_answers.md)：问题的回答。
+*   [`posts_moderator_nomination`](../tables/posts_moderator_nomination.md)：与版主提名相关的帖子。
+*   [`posts_orphaned_tag_wiki`](../tables/posts_orphaned_tag_wiki.md)：孤立的标签 wiki 帖子。
+*   [`posts_privilege_wiki`](../tables/posts_privilege_wiki.md)：权限 wiki 帖子。
+*   [`posts_questions`](../tables/posts_questions.md)：用户提交的问题。
+*   [`posts_tag_wiki`](../tables/posts_tag_wiki.md)：标签 wiki 条目。
+*   [`posts_tag_wiki_excerpt`](../tables/posts_tag_wiki_excerpt.md)：标签 wiki 条目的摘要。
+*   [`posts_wiki_placeholder`](../tables/posts_wiki_placeholder.md)：wiki 内容的占位帖子。
+*   [`stackoverflow_posts`](../tables/stackoverflow_posts.md)：所有帖子（问题和回答）的整合视图。
+*   [`tags`](../tables/tags.md)：Stack Overflow 上所用标签的信息。
+*   [`users`](../tables/users.md)：用户资料与统计。
+*   [`votes`](../tables/votes.md)：帖子的投票记录。
+
+# 常见查询模式
+
+如需浏览本数据集中的表：
 
 ```sql
 SELECT table_name
@@ -46,7 +47,7 @@ FROM `bigquery-public-data.stackoverflow.INFORMATION_SCHEMA.TABLES`
 WHERE table_schema = 'stackoverflow';
 ```
 
-To query the number of questions posted in a specific year:
+如需查询某一年发布的提问数量：
 
 ```sql
 SELECT

@@ -1,9 +1,8 @@
 ---
 type: Reference
 resource: https://github.com/blockchain-etl/bitcoin-etl
-title: Transactions to Outputs Join Path
-description: Join path between transactions and outputs to audit target recipient
-  distribution.
+title: 交易到输出的 Join Path
+description: 交易与输出之间的 join 路径，用于审计目标收款方分布。
 tags:
 - join
 - bitcoin
@@ -16,7 +15,7 @@ sources:
   id: bitcoin-etl
 ---
 
-This join path relates a transaction to its generated outputs. Joining `transactions` with `outputs` is useful for tracking how funds are distributed (split or forwarded) from a parent transaction into target addresses.
+该 join 路径将一个交易关联到其生成的输出。将 `transactions` 与 `outputs` join，有助于追踪资金如何从父交易分发（拆分或转发）到目标地址。
 
 ```sql
 SELECT

@@ -1,9 +1,8 @@
 ---
 type: BigQuery Table
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/stackoverflow/tables/badges
-title: Badges
-description: This table contains information about badges awarded to users on Stack
-  Overflow.
+title: 徽章
+description: 该表包含 Stack Overflow 上授予用户的徽章信息。
 tags:
 - stackoverflow
 - badges
@@ -17,18 +16,20 @@ sources:
   id: badges-table
 ---
 
-The `badges` table tracks all badges awarded to users on the Stack Overflow platform. Each row represents a single badge instance awarded to a specific user at a specific time. The table includes details such as the badge's name, the user who received it, and whether it's a tag-based badge. This data can be used to analyze user engagement, recognize top contributors, and understand the gamification aspects of the platform.
+`badges` 表跟踪 Stack Overflow 平台上授予用户的所有徽章。每一行代表在某个特定时间授予某个特定用户的单个徽章实例。该表包含徽章名称、获得徽章的用户，以及是否为基于标签的徽章等详细信息。这些数据可用于分析用户参与度、识别顶尖贡献者，并理解平台的游戏化机制。
 
-# Schema
-- `id`: INTEGER, Unique identifier for the badge award.
-- `name`: STRING, Name of the awarded badge (e.g., "Great Answer", "Electorate").
-- `date`: TIMESTAMP, The date and time the badge was awarded.
-- `user_id`: INTEGER, The ID of the user who received the badge. Links to the [users](../tables/users.md) table.
-- `class`: INTEGER, The class or tier of the badge (e.g., 1 for gold, 2 for silver, 3 for bronze).
-- `tag_based`: BOOLEAN, Indicates whether the badge is associated with a specific tag.
+# 架构
 
-# Common query patterns
-1. **Count the number of badges awarded per user:**
+- `id`: INTEGER，徽章授予记录的唯一标识符。
+- `name`: STRING，所授予徽章的名称（如 "Great Answer"、"Electorate"）。
+- `date`: TIMESTAMP，授予徽章的日期和时间。
+- `user_id`: INTEGER，获得该徽章的用户 ID。链接到 [users](../tables/users.md) 表。
+- `class`: INTEGER，徽章的等级或层级（如 1 为金牌，2 为银牌，3 为铜牌）。
+- `tag_based`: BOOLEAN，指示该徽章是否与特定标签关联。
+
+# 常见查询模式
+
+1. **统计每位用户获得的徽章数量：**
    ```sql
    SELECT
      user_id,
@@ -41,7 +42,7 @@ The `badges` table tracks all badges awarded to users on the Stack Overflow plat
      badge_count DESC
    LIMIT 10;
    ```
-2. **Find the most frequently awarded badges:**
+2. **查找授予最频繁的徽章：**
    ```sql
    SELECT
      name,
@@ -54,7 +55,7 @@ The `badges` table tracks all badges awarded to users on the Stack Overflow plat
      award_count DESC
    LIMIT 10;
    ```
-3. **Get all gold badges awarded to a specific user:**
+3. **获取授予特定用户的所有金牌徽章：**
    ```sql
    SELECT
      t2.display_name,
@@ -67,7 +68,7 @@ The `badges` table tracks all badges awarded to users on the Stack Overflow plat
    ON
      t1.user_id = t2.id
    WHERE
-     t1.class = 1 -- Assuming class 1 is Gold
+     t1.class = 1 -- 假设 class 1 为金牌
      AND t2.display_name = 'Jon Skeet'
    ORDER BY
      t1.date DESC;

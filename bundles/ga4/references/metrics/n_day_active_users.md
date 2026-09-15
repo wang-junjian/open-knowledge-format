@@ -1,8 +1,8 @@
 ---
 type: Reference
 resource: https://support.google.com/analytics/answer/9037342
-title: N-Day Active Users Metric
-description: Builds an audience of users active in the last N days based on engagement_time_msec.
+title: N 日活跃用户指标
+description: 基于 engagement_time_msec 构建最近 N 天内活跃的用户的受众。
 tags:
 - metric
 - audience
@@ -17,19 +17,19 @@ sources:
   id: sample_queries
 ---
 
-Builds an audience of N-Day Active Users, defined as users who have logged at least one event with the event parameter `engagement_time_msec > 0` in the last N days.
+构建一个 N 日活跃用户（N-Day Active Users）受众，定义为在最近 N 天内记录了至少一个带有事件参数 `engagement_time_msec > 0` 的事件的用户。
 
-# Schema
-This reference describes a query pattern and does not map to a single database schema.
+# 结构
+本参考描述了一种查询模式，并不映射到单一的数据库 schema。
 
-# Common query patterns
+# 常见查询模式
 
 ```sql
 /**
- * Builds an audience of N-Day Active Users.
+ * 构建 N 日活跃用户受众。
  *
- * N-day active users = users who have logged at least one event with event param 
- * engagement_time_msec > 0 in the last N days.
+ * N 日活跃用户 = 在最近 N 天内记录了至少一个
+ * 带有事件参数 engagement_time_msec > 0 的事件的用户。
 */
 
 SELECT
@@ -40,11 +40,11 @@ FROM
       T.event_params
 WHERE
   event_params.key = 'engagement_time_msec' AND event_params.value.int_value > 0
-  -- Pick events in the last N = 20 days.
+  -- 选择最近 N = 20 天内的事件。
   AND event_timestamp >
       UNIX_MICROS(TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 20 DAY))
   AND _TABLE_SUFFIX BETWEEN '20180521' AND '20240131';
 ```
 [^sample_queries]
 
-[^sample_queries]: [Google Analytics Help: Sample queries for audiences based on BigQuery data](https://support.google.com/analytics/answer/9037342)
+[^sample_queries]: [Google Analytics 帮助：基于 BigQuery 数据的受众示例查询](https://support.google.com/analytics/answer/9037342)

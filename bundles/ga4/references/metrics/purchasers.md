@@ -1,9 +1,8 @@
 ---
 type: Reference
 resource: https://support.google.com/analytics/answer/9037342
-title: Purchasers Audience Metric
-description: Computes the count or list of users who have completed a purchase or
-  in-app purchase.
+title: 购买者受众指标
+description: 计算已完成购买或应用内购买的用户的计数或列表。
 tags:
 - metric
 - audience
@@ -18,19 +17,18 @@ sources:
   resource: https://support.google.com/analytics/answer/9037342
 ---
 
-Computes the audience of purchasers, defined as users who have logged either `in_app_purchase` or `purchase`.
+计算购买者（purchasers）受众，定义为记录了 `in_app_purchase` 或 `purchase` 的用户。
 
-# Schema
-This reference describes a query pattern and does not map to a single database schema.
+# 结构
+本参考描述了一种查询模式，并不映射到单一的数据库 schema。
 
-# Common query patterns
+# 常见查询模式
 
 ```sql
 /**
- * Computes the audience of purchasers.
+ * 计算购买者受众。
  *
- * Purchasers = users who have logged either in_app_purchase or
- * purchase.
+ * 购买者 = 记录了 in_app_purchase 或 purchase 的用户。
  */
  
 SELECT
@@ -43,4 +41,4 @@ WHERE
 ```
 [^sample_queries]
 
-[^sample_queries]: [Google Analytics Help: Sample queries for audiences based on BigQuery data](https://support.google.com/analytics/answer/9037342)
+[^sample_queries]: [Google Analytics 帮助：基于 BigQuery 数据的受众示例查询](https://support.google.com/analytics/answer/9037342)

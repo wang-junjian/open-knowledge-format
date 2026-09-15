@@ -1,8 +1,8 @@
 ---
 type: BigQuery Table
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/stackoverflow/tables/comments
-title: Comments
-description: Contains all comments made on posts within the Stack Overflow dataset.
+title: 评论
+description: 包含 Stack Overflow 数据集中所有对帖子发表的评论。
 tags:
 - comments
 - stackoverflow
@@ -16,21 +16,21 @@ sources:
   title: Stack Overflow Comments Table
 ---
 
-The `comments` table within the [Stack Overflow dataset](../datasets/stackoverflow.md) contains a record of all comments posted on questions and answers by users. Each row represents a single comment, providing details such as the comment's text, its creation date, the associated post, and the user who made the comment. This table can be joined with the [posts_questions](posts_questions.md) or [posts_answers](posts_answers.md) tables on `post_id` to retrieve the content being commented on, and with the [users](users.md) table on `user_id` to get more information about the commenter. The data spans from September 2008 onwards.
+[Stack Overflow 数据集](../datasets/stackoverflow.md) 中的 `comments` 表记录了用户在所有问题和回答上发布的所有评论。每一行代表一条评论，提供评论文本、创建日期、所属帖子以及评论者等详细信息。可通过 `post_id` 将此表与 [posts_questions](posts_questions.md) 或 [posts_answers](posts_answers.md) 表连接以获取被评论的内容，并通过 `user_id` 与 [users](users.md) 表连接以获取评论者的更多信息。数据自 2008 年 9 月起。
 
-# Schema
+# 架构
 
-- `id`: Unique identifier for the comment.
-- `text`: The content of the comment.
-- `creation_date`: Timestamp when the comment was created.
-- `post_id`: The ID of the post (question or answer) the comment belongs to.
-- `user_id`: The ID of the user who made the comment.
-- `user_display_name`: The display name of the user who made the comment (may be NULL if user is anonymous or deleted).
-- `score`: The score or upvotes received by the comment.
+- `id`: 评论的唯一标识符。
+- `text`: 评论的内容。
+- `creation_date`: 评论创建的timestamp。
+- `post_id`: 评论所属帖子（问题或回答）的 ID。
+- `user_id`: 发表评论的用户 ID。
+- `user_display_name`: 发表评论用户的显示名称（若用户匿名或已删除，可能为 NULL）。
+- `score`: 评论获得的评分或赞同票。
 
-# Common query patterns
+# 常见查询模式
 
-1.  **Retrieve all comments for a specific post:**
+1.  **检索某个帖子的所有评论：**
     ```sql
     SELECT
       id,
@@ -47,7 +47,7 @@ The `comments` table within the [Stack Overflow dataset](../datasets/stackoverfl
     LIMIT 100;
     ```
 
-2.  **Count comments per user:**
+2.  **统计每位用户的评论数：**
     ```sql
     SELECT
       user_display_name,
@@ -63,7 +63,7 @@ The `comments` table within the [Stack Overflow dataset](../datasets/stackoverfl
     LIMIT 10;
     ```
 
-3.  **Find comments on questions containing a specific keyword:**
+3.  **查找包含特定关键词的问题评论：**
     ```sql
     SELECT
       c.id,

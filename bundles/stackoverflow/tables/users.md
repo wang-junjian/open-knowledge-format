@@ -1,8 +1,8 @@
 ---
 type: BigQuery Table
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/stackoverflow/tables/users
-title: Stack Overflow Users
-description: Contains information about registered users on the Stack Overflow platform.
+title: Stack Overflow 用户
+description: 包含 Stack Overflow 平台上注册用户的信息。
 tags: stackoverflow, users, community, reputation
 generated:
   by: reference_agent/gemini-2.5-flash
@@ -13,28 +13,28 @@ sources:
   id: bq-table-users
 ---
 
-The `users` table in the [stackoverflow](../datasets/stackoverflow.md) dataset provides a comprehensive profile for each registered user on the Stack Overflow platform. Each row in this table represents a unique user, capturing details such as their display name, reputation score, activity dates, and biographical information. This table is essential for analyzing user behavior, community engagement, and overall platform dynamics.
+[stackoverflow](../datasets/stackoverflow.md) 数据集中的 `users` 表为 Stack Overflow 平台上的每位注册用户提供综合资料。该表中的每一行代表一个唯一用户，记录了其显示名称、声望评分、活动日期和传记信息等详细信息。该表对于分析用户行为、社区参与度和整体平台动态至关重要。
 
-# Schema
+# 架构
 
-- `id`: Unique identifier for the user.
-- `display_name`: The public display name chosen by the user.
-- `about_me`: A short biography provided by the user.
-- `age`: User's age (as a string, if provided).
-- `creation_date`: Timestamp when the user account was created.
-- `last_access_date`: Timestamp of the user's last activity or login.
-- `location`: The geographical location provided by the user.
-- `reputation`: The user's reputation score.
-- `up_votes`: Total number of upvotes received by the user.
-- `down_votes`: Total number of downvotes received by the user.
-- `views`: Number of times the user's profile has been viewed.
-- `profile_image_url`: URL to the user's profile picture.
-- `website_url`: URL to the user's personal website.
+- `id`: 用户的唯一标识符。
+- `display_name`: 用户选择的公开显示名称。
+- `about_me`: 用户提供的简短个人简介。
+- `age`: 用户的年龄（以字符串形式，如提供）。
+- `creation_date`: 用户账户创建的timestamp。
+- `last_access_date`: 用户最近活动或登录的timestamp。
+- `location`: 用户提供的地理位置。
+- `reputation`: 用户的声望评分。
+- `up_votes`: 用户收到的赞同票总数。
+- `down_votes`: 用户收到的反对票总数。
+- `views`: 用户资料的浏览次数。
+- `profile_image_url`: 用户头像图片的 URL。
+- `website_url`: 用户个人网站的 URL。
 
-# Common query patterns
+# 常见查询模式
 
 ```sql
--- Get the top 10 users by reputation
+-- 按声望获取前 10 名用户
 SELECT
     display_name,
     reputation,
@@ -47,7 +47,7 @@ LIMIT 10;
 ```
 
 ```sql
--- Find users who joined in 2020 and have a high number of upvotes
+-- 查找 2020 年加入且拥有大量赞同票的用户
 SELECT
     id,
     display_name,
@@ -64,7 +64,7 @@ LIMIT 5;
 ```
 
 ```sql
--- Count users by location (top 5 locations)
+-- 按地点统计用户数（前 5 个地点）
 SELECT
     location,
     COUNT(id) AS user_count

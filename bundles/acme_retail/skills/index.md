@@ -1,3 +1,3 @@
 # Skill
 
-* [Run an Attested Computation on BigQuery](run-on-bq.md) - Executor for Attested Computations with runtime: bigquery.
+* [在 BigQuery 上运行 Attested Computation](run-on-bq.md) - 面向 `runtime: bigquery` 的 Attested Computation 的执行器。

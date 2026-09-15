@@ -1,8 +1,8 @@
 ---
 type: BigQuery Table
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/stackoverflow/tables/posts_tag_wiki_excerpt
-title: Posts Tag Wiki Excerpt
-description: This table contains excerpt posts from the Stack Overflow tag wikis.
+title: 帖子标签 Wiki 摘要
+description: 该表包含 Stack Overflow 标签 wiki 的摘要帖子。
 tags:
 - stackoverflow
 - tag wiki
@@ -17,32 +17,32 @@ sources:
   title: 'BigQuery Table: posts_tag_wiki_excerpt'
 ---
 
-This table contains excerpt posts from the Stack Overflow tag wikis. Each row represents a summary or excerpt of a tag wiki, providing a brief description of a particular tag. This can be useful for understanding the purpose and context of various tags used on the Stack Overflow platform without needing to read the full tag wiki.
+该表包含 Stack Overflow 标签 wiki 的摘要帖子。每一行代表一个标签 wiki 的摘要或节选，提供特定标签的简要描述。这有助于在不阅读完整标签 wiki 的情况下理解 Stack Overflow 平台上各种标签的用途和背景。
 
-# Schema
+# 架构
 
-- `id`: INTEGER, Unique identifier for the tag wiki excerpt post.
-- `title`: STRING, Title of the tag wiki excerpt.
-- `body`: STRING, The main content or body of the tag wiki excerpt.
-- `accepted_answer_id`: STRING, ID of the accepted answer (if applicable, though unlikely for tag wiki excerpts).
-- `answer_count`: STRING, Number of answers (if applicable).
-- `comment_count`: INTEGER, Number of comments on the post.
-- `community_owned_date`: TIMESTAMP, Date when the post became community-owned.
-- `creation_date`: TIMESTAMP, Date when the post was created.
-- `favorite_count`: STRING, Number of times the post has been favorited.
-- `last_activity_date`: TIMESTAMP, Date of the last activity on the post.
-- `last_edit_date`: TIMESTAMP, Date of the last edit to the post.
-- `last_editor_display_name`: STRING, Display name of the last editor.
-- `last_editor_user_id`: INTEGER, User ID of the last editor.
-- `owner_display_name`: STRING, Display name of the post owner.
-- `owner_user_id`: INTEGER, User ID of the post owner.
-- `parent_id`: STRING, ID of the parent post (if applicable).
-- `post_type_id`: INTEGER, Type of the post (e.g., 5 for Tag Wiki Excerpt).
-- `score`: INTEGER, Score of the post.
-- `tags`: STRING, Tags associated with the post (e.g., `<python><sql>`).
-- `view_count`: STRING, Number of times the post has been viewed.
+- `id`: INTEGER，标签 wiki 摘要帖子的唯一标识符。
+- `title`: STRING，标签 wiki 摘要的标题。
+- `body`: STRING，标签 wiki 摘要的正文或内容。
+- `accepted_answer_id`: STRING，被采纳回答的 ID（如适用，但在标签 wiki 摘要中不太可能出现）。
+- `answer_count`: STRING，回答数量（如适用）。
+- `comment_count`: INTEGER，帖子上的评论数量。
+- `community_owned_date`: TIMESTAMP，帖子转为社区所有的日期。
+- `creation_date`: TIMESTAMP，帖子创建的日期。
+- `favorite_count`: STRING，帖子被收藏的次数。
+- `last_activity_date`: TIMESTAMP，帖子上最近活动的日期。
+- `last_edit_date`: TIMESTAMP，帖子最近一次编辑的日期。
+- `last_editor_display_name`: STRING，最近编辑者的显示名称。
+- `last_editor_user_id`: INTEGER，最近编辑者的用户 ID。
+- `owner_display_name`: STRING，帖子所有者的显示名称。
+- `owner_user_id`: INTEGER，帖子所有者的用户 ID。
+- `parent_id`: STRING，父帖子的 ID（如适用）。
+- `post_type_id`: INTEGER，帖子类型（如 5 为标签 Wiki 摘要）。
+- `score`: INTEGER，帖子的评分。
+- `tags`: STRING，与帖子关联的标签（如 `<python><sql>`）。
+- `view_count`: STRING，帖子的浏览次数。
 
-# Common query patterns
+# 常见查询模式
 
 ```sql
 SELECT

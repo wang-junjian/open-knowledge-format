@@ -1,9 +1,8 @@
 ---
 type: BigQuery Table
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/stackoverflow/tables/stackoverflow_posts
-title: Stack Overflow Posts (Deprecated)
-description: A deprecated table containing Stack Overflow posts. Use the posts_answers
-  or posts_questions tables instead.
+title: Stack Overflow 帖子（已弃用）
+description: 包含 Stack Overflow 帖子的已弃用表。请改用 posts_answers 或 posts_questions 表。
 tags: stackoverflow, posts, deprecated
 status: deprecated
 generated:
@@ -15,39 +14,40 @@ sources:
   resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/stackoverflow/tables/stackoverflow_posts
 ---
 
-This table, `stackoverflow_posts`, contains a comprehensive collection of posts from Stack Overflow. Each row represents a single post, which can be a question, an answer, or another type of post. Key information includes the post's title, body, creation date, score, and associated tags.
+`stackoverflow_posts` 表包含来自 Stack Overflow 的帖子合集。每一行代表一条帖子，可以是问题、回答或其他类型的帖子。关键信息包括帖子的标题、正文、创建日期、评分以及关联的标签。
 
-**WARNING:** This table is **deprecated** and should not be used for new development or analysis. For up-to-date and more specialized data, please use the individual post type tables, specifically [posts_questions](posts_questions.md) for questions and [posts_answers](posts_answers.md) for answers.
+**警告：** 该表**已弃用**，不应用于新的开发或分析。如需最新且更专业的数据，请使用单独的帖子类型表，具体而言，问题请使用 [posts_questions](posts_questions.md)，回答请使用 [posts_answers](posts_answers.md)。
 
-# Schema
-The `stackoverflow_posts` table contains the following fields:
+# 架构
 
-*   `id`: `INTEGER` (REQUIRED) - Unique identifier for the post.
-*   `title`: `STRING` - The title of the post (e.g., for questions).
-*   `body`: `STRING` - The main content of the post.
-*   `accepted_answer_id`: `INTEGER` - The ID of the accepted answer, if applicable.
-*   `answer_count`: `INTEGER` - Number of answers to a question.
-*   `comment_count`: `INTEGER` - Number of comments on the post.
-*   `community_owned_date`: `TIMESTAMP` - Date when the post became community owned.
-*   `creation_date`: `TIMESTAMP` - Date and time the post was created.
-*   `favorite_count`: `INTEGER` - Number of times the post has been favorited.
-*   `last_activity_date`: `TIMESTAMP` - Last date of activity on the post.
-*   `last_edit_date`: `TIMESTAMP` - Last date the post was edited.
-*   `last_editor_display_name`: `STRING` - Display name of the last editor.
-*   `last_editor_user_id`: `INTEGER` - User ID of the last editor.
-*   `owner_display_name`: `STRING` - Display name of the post owner.
-*   `owner_user_id`: `INTEGER` - User ID of the post owner.
-*   `parent_id`: `INTEGER` - For answers, the ID of the question it answers.
-*   `post_type_id`: `INTEGER` - Type of the post (e.g., 1 for Question, 2 for Answer).
-*   `score`: `INTEGER` - The current score of the post.
-*   `tags`: `STRING` - Tags associated with the post, typically for questions (e.g., `<python><django>`).
-*   `view_count`: `INTEGER` - Number of times the post has been viewed.
+`stackoverflow_posts` 表包含以下字段：
 
-# Common query patterns
+*   `id`: `INTEGER` (REQUIRED) - 帖子的唯一标识符。
+*   `title`: `STRING` - 帖子的标题（如对问题而言）。
+*   `body`: `STRING` - 帖子的正文内容。
+*   `accepted_answer_id`: `INTEGER` - 被采纳回答的 ID（如适用）。
+*   `answer_count`: `INTEGER` - 问题的回答数量。
+*   `comment_count`: `INTEGER` - 帖子上的评论数量。
+*   `community_owned_date`: `TIMESTAMP` - 帖子转为社区所有的日期。
+*   `creation_date`: `TIMESTAMP` - 帖子创建的日期和时间。
+*   `favorite_count`: `INTEGER` - 帖子被收藏的次数。
+*   `last_activity_date`: `TIMESTAMP` - 帖子上最近活动的日期。
+*   `last_edit_date`: `TIMESTAMP` - 帖子最近一次编辑的日期。
+*   `last_editor_display_name`: `STRING` - 最近编辑者的显示名称。
+*   `last_editor_user_id`: `INTEGER` - 最近编辑者的用户 ID。
+*   `owner_display_name`: `STRING` - 帖子所有者的显示名称。
+*   `owner_user_id`: `INTEGER` - 帖子所有者的用户 ID。
+*   `parent_id`: `INTEGER` - 对回答而言，为其所回答问题 ID。
+*   `post_type_id`: `INTEGER` - 帖子类型（如 1 为 Question，2 为 Answer）。
+*   `score`: `INTEGER` - 帖子的当前评分。
+*   `tags`: `STRING` - 与帖子关联的标签，通常针对问题（如 `<python><django>`）。
+*   `view_count`: `INTEGER` - 帖子的浏览次数。
+
+# 常见查询模式
 
 ```sql
--- DANGER: This table is deprecated. Do not use for new queries.
--- Example of selecting basic post information (for historical context only).
+-- 危险：该表已弃用。请勿用于新查询。
+-- 选择基础帖子信息的示例（仅供历史参考）。
 SELECT
     id,
     title,

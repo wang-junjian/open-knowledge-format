@@ -1,7 +1,7 @@
 ---
 type: Attested Computation
-title: Gross margin for a period
-description: Sanctioned SQL that produces the gross-margin figure for a period, per Acme's FY2026 Cost Allocation Standard (full COGS = product + fulfillment + shipping + payment fees).
+title: 某一期间的毛利率
+description: 依据 Acme FY2026 成本分摊标准（完整 COGS = 商品成本 + 履约成本 + 运费 + 支付手续费）生成的某期间毛利率数值的授权 SQL。
 tags: [finance, margin, attested]
 runtime: bigquery
 parameters:
@@ -73,15 +73,15 @@ FROM recognized_orders AS r
 LEFT JOIN cogs_full AS c USING (order_id)
 ```
 
-# Notes on the COGS composition
+# 关于 COGS 构成的说明
 
-Every one of the four COGS components is required per the FY2026 Cost Allocation Standard. [^margin-standard] A receipt whose executed SQL drops any of the four LEFT JOINs on `cogs_full` will fail attestation, because canonicalized-SQL equality includes the join graph.
+依据 FY2026 成本分摊标准，四项 COGS 构成缺一不可。[^margin-standard] 若执行 SQL 丢弃了 `cogs_full` 上的任意一个 LEFT JOIN，其回执将无法通过认证（attestation），因为规范化 SQL 的相等性校验包含 join 图（join graph）。
 
-The revenue side uses the same recognition rules as [`computations/revenue-ytd.md`](./revenue-ytd.md), by policy.
+收入侧依据策略，使用与 [`computations/revenue-ytd.md`](./revenue-ytd.md) 相同的确认规则。
 
-# Freshness
+# 时效（Freshness）
 
-`stale_after: 2026-12-31T00:00:00Z` mirrors the cost-allocation standard's annual review. The standard is expected to remain stable through the FY, but a consumer running this after 2027-01-01 MUST re-verify against the FY2027 standard before serving.
+`stale_after: 2026-12-31T00:00:00Z` 与成本分摊标准的年度审查周期一致。该标准预期在本财年内保持稳定，但在 2027-01-01 之后运行此计算的消费方 MUST 重新依据 FY2027 标准校验，方可对外提供。
 
 [^margin-standard]: Cost Allocation & Margin Standard (FY2026)
 [^revenue-policy]: Revenue Recognition Policy (FY2026)

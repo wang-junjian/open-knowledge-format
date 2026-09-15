@@ -1,9 +1,8 @@
 ---
 type: Reference
 resource: https://support.google.com/analytics/answer/9037342
-title: N-Day Inactive Users Metric
-description: Builds an audience of users active in the last M days who have not been
-  active in the last N days.
+title: N 日非活跃用户指标
+description: 构建一个在最近 M 天中活跃、但在最近 N 天内未活跃的用户的受众。
 tags:
 - metric
 - audience
@@ -18,20 +17,20 @@ sources:
   resource: https://support.google.com/analytics/answer/9037342
 ---
 
-Builds an audience of N-Day Inactive Users. Inactive users are defined as those active in the last M days (e.g. 7 days) who have NOT logged any event with event parameter `engagement_time_msec > 0` in the last N days (e.g. 2 days), where M > N.
+构建一个 N 日非活跃用户（N-Day Inactive Users）受众。非活跃用户定义为在最近 M 天（例如 7 天）内活跃、但在最近 N 天（例如 2 天）内未记录任何带有事件参数 `engagement_time_msec > 0` 的事件的用户，其中 M > N。
 
-# Schema
-This reference describes a query pattern and does not map to a single database schema.
+# 结构
+本参考描述了一种查询模式，并不映射到单一的数据库 schema。
 
-# Common query patterns
+# 常见查询模式
 
 ```sql
 /**
- * Builds an audience of N-Day Inactive Users.
+ * 构建 N 日非活跃用户受众。
  *
- * N-Day inactive users = users in the last M days who have not logged one  
- * event with event param engagement_time_msec > 0 in the last N days 
- *  where M > N.
+ * N 日非活跃用户 = 在最近 M 天内活跃、但在最近 N 天内
+ * 未记录任何带有事件参数 engagement_time_msec > 0 的事件的用户，
+ * 其中 M > N。
  */
  
 SELECT
@@ -46,7 +45,7 @@ FROM
       T.event_params
     WHERE
       event_params.key = 'engagement_time_msec' AND event_params.value.int_value > 0
-      /* Has engaged in last M = 7 days */
+      /* 在最近 M = 7 天内有过互动 */
       AND event_timestamp >
           UNIX_MICROS(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY))
       AND _TABLE_SUFFIX BETWEEN '20180521' AND '20240131'
@@ -61,7 +60,7 @@ LEFT JOIN
       T.event_params
     WHERE
       event_params.key = 'engagement_time_msec' AND event_params.value.int_value > 0
-      /* Has engaged in last N = 2 days */
+      /* 在最近 N = 2 天内有过互动 */
       AND event_timestamp >
           UNIX_MICROS(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY))
       AND _TABLE_SUFFIX BETWEEN '20180521' AND '20240131'
@@ -72,4 +71,4 @@ WHERE
 ```
 [^sample_queries]
 
-[^sample_queries]: [Google Analytics Help: Sample queries for audiences based on BigQuery data](https://support.google.com/analytics/answer/9037342)
+[^sample_queries]: [Google Analytics 帮助：基于 BigQuery 数据的受众示例查询](https://support.google.com/analytics/answer/9037342)

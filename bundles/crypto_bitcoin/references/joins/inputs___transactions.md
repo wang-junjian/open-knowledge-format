@@ -1,8 +1,8 @@
 ---
 type: Reference
 resource: https://github.com/blockchain-etl/bitcoin-etl
-title: Transactions to Inputs Join Path
-description: Join path between transactions and inputs to trace fund consumption details.
+title: 交易到输入的 Join Path
+description: 交易与输入之间的 join 路径，用于追溯资金消耗明细。
 tags:
 - join
 - bitcoin
@@ -15,7 +15,7 @@ sources:
   resource: https://github.com/blockchain-etl/bitcoin-etl
 ---
 
-This join path connects transactions to their inputs. In the Unspent Transaction Output (UTXO) database structure, joining the main `transactions` table with the flat `inputs` table lets analysts audit the historical origin of funds being consumed in a transaction.
+该 join 路径将交易关联到其输入。在 UTXO（未花费交易输出，Unspent Transaction Output）数据库结构中，将主 `transactions` 表与扁平的 `inputs` 表 join，可供分析人员审计交易中所消耗资金的历史来源。
 
 ```sql
 SELECT

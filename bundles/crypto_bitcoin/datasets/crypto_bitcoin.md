@@ -1,9 +1,8 @@
 ---
 type: BigQuery Dataset
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/crypto_bitcoin
-title: Bitcoin Blockchain Dataset
-description: A public Google BigQuery dataset containing the complete transaction
-  ledger and block history of the Bitcoin blockchain.
+title: 比特币区块链数据集
+description: 一个公开的 Google BigQuery 数据集，包含比特币区块链完整的交易账本与区块历史。
 tags:
 - bitcoin
 - blockchain
@@ -18,31 +17,31 @@ sources:
   id: bq-crypto-bitcoin-meta
 ---
 
-The `crypto_bitcoin` dataset is a public Google BigQuery dataset containing the entire blockchain transaction history for Bitcoin. It is updated continuously and provides a highly structured, queryable format of block and transaction data from the genesis block onwards.
+`crypto_bitcoin` 数据集是一个公开的 Google BigQuery 数据集，包含比特币完整的区块链交易历史。它持续更新，并以高度结构化、可查询的格式提供从创世区块（genesis block）起的区块与交易数据。
 
-The dataset contains four primary tables:
-- [blocks](../tables/blocks.md) representing Bitcoin blocks, including hashes, sizes, transaction counts, and block rewards.
-- [transactions](../tables/transactions.md) containing top-level transaction details such as inputs/outputs totals, fees, and cryptographic signatures.
-- [inputs](../tables/inputs.md) containing the transaction inputs (spending previous outputs) representing the source of funds.
-- [outputs](../tables/outputs.md) containing the transaction outputs representing the destinations of funds (addresses and values).
+该数据集包含四张主表：
+- [blocks](../tables/blocks.md)：代表比特币区块，包含哈希、大小、交易数量与区块奖励（block rewards）。
+- [transactions](../tables/transactions.md)：包含顶层交易明细，如输入/输出总额、手续费与加密签名。
+- [inputs](../tables/inputs.md)：包含交易输入（花费先前输出），代表资金来源。
+- [outputs](../tables/outputs.md)：包含交易输出，代表资金去向（地址与金额）。
 
-This dataset is widely used for blockchain forensics, macroeconomic analysis of transaction volumes, wallet balance tracking, and research into mining activities.
+该数据集广泛用于区块链取证（forensics）、交易量的宏观经济分析、钱包余额追踪以及挖矿活动研究。
 
-# Schema
+# 表结构（Schema）
 
-As a BigQuery Dataset, `crypto_bitcoin` acts as a namespace and container for the following tables:
+作为 BigQuery 数据集，`crypto_bitcoin` 充当以下各表的命名空间与容器：
 
 | Table ID | Description |
 | :--- | :--- |
-| **[blocks](../tables/blocks.md)** | Blocks containing transactions that have been validated and written to the ledger. |
-| **[transactions](../tables/transactions.md)** | Individual ledger entries where value is transferred between participants. |
-| **[inputs](../tables/inputs.md)** | References to UTXOs (Unspent Transaction Outputs) being spent in transactions. |
-| **[outputs](../tables/outputs.md)** | Outputs created by transactions that become new UTXOs. |
+| **[blocks](../tables/blocks.md)** | 包含已验证并写入账本的交易区块。 |
+| **[transactions](../tables/transactions.md)** | 在参与者之间转移价值的独立账本条目。 |
+| **[inputs](../tables/inputs.md)** | 指向交易中正被花费的 UTXO（未花费交易输出，Unspent Transaction Outputs）的引用。 |
+| **[outputs](../tables/outputs.md)** | 由交易创建的、成为新 UTXO 的输出。 |
 
-# Common query patterns
+# 常见查询模式（Common query patterns）
 
-### 1. Count of blocks and average transaction count per block by month
-This query calculates the monthly volume of blocks and the average number of transactions included per block.
+### 1. 按月统计区块数量及每块平均交易数
+该查询计算每月的区块数量，以及每块包含的平均交易数。
 
 ```sql
 SELECT
@@ -58,8 +57,8 @@ ORDER BY
 LIMIT 12;
 ```
 
-### 2. Transaction fee statistics (in Satoshis) over the last 30 days
-This query explores transaction fee distributions across recent transactions.
+### 2. 最近 30 天的交易手续费统计（以 Satoshis 计）
+该查询探查近期交易的手续费分布。
 
 ```sql
 SELECT

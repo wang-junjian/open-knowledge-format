@@ -1,8 +1,8 @@
 ---
 type: BigQuery Table
 resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/crypto_bitcoin/tables/inputs
-title: Bitcoin Transaction Inputs
-description: Bitcoin transaction inputs detailing UTXOs spent.
+title: 比特币交易输入
+description: 比特币交易输入，详述所花费的 UTXO。
 tags:
 - bitcoin
 - crypto
@@ -18,35 +18,35 @@ sources:
   id: bitcoin-etl
 ---
 
-The `inputs` table contains details of all transaction inputs (UTXOs spent) on the Bitcoin blockchain. Each row represents a single input that was consumed to fund a transaction[^bitcoin-etl]. Because Bitcoin uses an Unspent Transaction Output (UTXO) model, every transaction consumes existing outputs (which become "inputs" in the new transaction) and creates new outputs[^bitcoin-etl].
+`inputs` 表包含比特币区块链上所有交易输入（被花费的 UTXO）的明细。每一行代表为给某笔交易提供资金而被消耗的一个输入 [^bitcoin-etl]。由于比特币采用未花费交易输出（UTXO）模型，每笔交易消耗既有输出（在新交易中成为“输入”），并创建新的输出 [^bitcoin-etl]。
 
-This table is particularly useful for tracking the flow of funds, analyzing spending behavior, and tracing transaction lineage. By linking the `spent_transaction_hash` and `spent_output_index` of an input back to the [outputs](outputs.md) table, analysts can fully reconstruct the transaction graph. 
+该表特别适用于追踪资金流向、分析花费行为以及追溯交易谱系（lineage）。通过将输入的 `spent_transaction_hash` 与 `spent_output_index` 回链到 [outputs](outputs.md) 表，分析人员可完整重建交易图（transaction graph）。
 
-Data is exported from the blockchain using the open-source [bitcoin-etl](https://github.com/blockchain-etl/bitcoin-etl) tool[^bitcoin-etl] and is housed in the [crypto_bitcoin](../datasets/crypto_bitcoin.md) dataset.
+数据使用开源工具 [bitcoin-etl](https://github.com/blockchain-etl/bitcoin-etl) 从区块链导出 [^bitcoin-etl]，存放于 [crypto_bitcoin](../datasets/crypto_bitcoin.md) 数据集。
 
-# Schema
+# 表结构（Schema）
 
 | Field Name | Type | Mode | Description |
 | :--- | :--- | :--- | :--- |
-| **transaction_hash** | STRING | NULLABLE | Hash of the transaction containing this input |
-| **block_hash** | STRING | NULLABLE | Hash of the block containing this transaction |
-| **block_number** | INTEGER | NULLABLE | Height of the block containing this transaction |
-| **block_timestamp** | TIMESTAMP | NULLABLE | Timestamp of the block containing this transaction |
-| **index** | INTEGER | NULLABLE | 0-based index of this input within the transaction |
-| **spent_transaction_hash** | STRING | NULLABLE | Hash of the transaction containing the output spent by this input |
-| **spent_output_index** | INTEGER | NULLABLE | Index of the output spent by this input in the original transaction |
-| **script_asm** | STRING | NULLABLE | Symbolic representation of the input's script (scriptSig) |
-| **script_hex** | STRING | NULLABLE | Hexadecimal representation of the input's script (scriptSig) |
-| **sequence** | INTEGER | NULLABLE | Transaction input sequence number |
-| **required_signatures** | INTEGER | NULLABLE | Number of signatures required to spend (if applicable) |
-| **type** | STRING | NULLABLE | Type of script (e.g., `witness_v1_taproot`, `pubkeyhash`) |
-| **addresses** | STRING | REPEATED | List of addresses associated with this input |
-| **value** | NUMERIC | NULLABLE | Value of the spent output in Satoshis |
+| **transaction_hash** | STRING | NULLABLE | 包含本输入的交易哈希 |
+| **block_hash** | STRING | NULLABLE | 包含本交易的区块哈希 |
+| **block_number** | INTEGER | NULLABLE | 包含本交易的区块高度 |
+| **block_timestamp** | TIMESTAMP | NULLABLE | 包含本交易的区块的时间戳 |
+| **index** | INTEGER | NULLABLE | 本输入在交易内从 0 开始的索引 |
+| **spent_transaction_hash** | STRING | NULLABLE | 本输入所花费输出所属交易的哈希 |
+| **spent_output_index** | INTEGER | NULLABLE | 本输入在原交易中花费的输出的索引 |
+| **script_asm** | STRING | NULLABLE | 输入脚本（scriptSig）的符号化表示 |
+| **script_hex** | STRING | NULLABLE | 输入脚本（scriptSig）的十六进制表示 |
+| **sequence** | INTEGER | NULLABLE | 交易输入序列号 |
+| **required_signatures** | INTEGER | NULLABLE | 花费所需的签名数量（如适用） |
+| **type** | STRING | NULLABLE | 脚本类型（如 `witness_v1_taproot`、`pubkeyhash`） |
+| **addresses** | STRING | REPEATED | 与本输入关联的地址列表 |
+| **value** | NUMERIC | NULLABLE | 被花费输出以 Satoshis 计的金额 |
 
-# Common query patterns
+# 常见查询模式（Common query patterns）
 
-### 1. Identify the largest transaction inputs in a given period
-This query retrieves the largest inputs consumed on a specific day, demonstrating how to find massive UTXO consolidations or large-value transfers.
+### 1. 识别给定时间段内最大的交易输入
+该查询检索特定日期消耗的最大输入，演示如何发现大额 UTXO 合并（consolidations）或大额转账。
 
 ```sql
 SELECT 
@@ -61,8 +61,8 @@ ORDER BY value DESC
 LIMIT 10;
 ```
 
-### 2. Track input types over time
-Analyze the adoption of modern Bitcoin script types (like Taproot) by counting inputs grouped by their transaction script type.
+### 2. 随时间追踪输入类型
+通过按交易脚本类型分组统计输入，分析现代比特币脚本类型（如 Taproot）的采用情况。
 
 ```sql
 SELECT 
@@ -76,8 +76,8 @@ GROUP BY block_date, type
 ORDER BY block_date DESC, input_count DESC;
 ```
 
-### 3. Trace provenance by joining inputs and outputs
-To find where funds spent in a transaction came from, you can join the inputs table to the outputs table using the spent transaction keys.
+### 3. 通过 join 输入与输出追溯来源溯源（provenance）
+要查找交易中所花费资金的来源，可使用花费交易键将 inputs 表 join 到 outputs 表。
 
 ```sql
 SELECT 
@@ -95,8 +95,8 @@ WHERE inp.block_timestamp >= '2024-04-17 00:00:00 UTC'
 LIMIT 10;
 ```
 
-# Joins
+# 关联（Joins）
 
-- [transactions](../references/joins/inputs___transactions.md) — Connects this spent input to the parent transaction record which spent it.
+- [transactions](../references/joins/inputs___transactions.md) — 将此被花费的输入关联到花费它的父交易记录。
 
 [^bitcoin-etl]: https://github.com/blockchain-etl/bitcoin-etl

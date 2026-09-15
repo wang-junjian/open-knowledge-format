@@ -1,9 +1,8 @@
 ---
 type: Reference
 resource: https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede
-title: Bad Question Flag Ratio
-description: Calculates the ratio of spam and offensive flags (VoteTypeId 4 and 12)
-  to overall votes/flags.
+title: 劣质问题标记率
+description: 计算垃圾信息与攻击性标记（VoteTypeId 4 和 12）占全部投票/标记的比例。
 tags:
 - metric
 - votes
@@ -19,9 +18,9 @@ sources:
 
 # bad_question_flag_ratio
 
-The bad question flag ratio measures the proportion of total flags cast on questions that are categorized as spam or offensive flags. This metric is a useful signal for tracking spam attack waves or highly inappropriate content trends.
+劣质问题标记率衡量在问题上投出的全部标记中，被归类为垃圾信息或攻击性标记所占的比例。该指标是追踪垃圾信息攻击浪潮或高度不当内容趋势的有用信号。
 
-## Formula
+## 公式
 
 ```sql
 SAFE_DIVIDE(
@@ -30,4 +29,4 @@ SAFE_DIVIDE(
 )
 ```
 
-[^1]: Formulas sourced and derived from the `VoteTypeId` categories (4 = Offensive, 12 = Spam) documented in [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede).
+[^1]: 公式来源于并基于 `VoteTypeId` 分类（4 = Offensive，12 = Spam）定义，详见 [Database Schema Documentation](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede)。

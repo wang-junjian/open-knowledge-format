@@ -1,9 +1,8 @@
 ---
 type: Reference
 resource: https://cloud.google.com/blog/topics/public-datasets/bitcoin-in-bigquery-blockchain-analytics-on-public-data
-title: Duplicate Transactions Metric
-description: An anomaly detection metric to find historical duplicate transactions
-  across different blocks.
+title: 重复交易指标
+description: 用于查找跨不同区块的历史重复交易的异常检测指标（metric）。
 tags:
 - metric
 - anomaly-detection
@@ -17,7 +16,7 @@ sources:
   resource: https://cloud.google.com/blog/topics/public-datasets/bitcoin-in-bigquery-blockchain-analytics-on-public-data
 ---
 
-The anomaly query pattern identifies transactions that appear in multiple blocks. Historically, in the Bitcoin blockchain, transactions could be duplicated due to a behavior in the original BerkeleyDB database engine that allowed non-unique keys. This was later addressed by implementing Bitcoin Improvement Proposal [BIP-0030](https://github.com/bitcoin/bips/blob/master/bip-0030.mediawiki) and transitioning to LevelDB.
+该异常查询模式用于识别出现在多个区块中的交易。历史上，在比特币区块链中，由于最初的 BerkeleyDB 数据库引擎允许非唯一键的行为，交易可能被复制。后来通过实施比特币改进提案 [BIP-0030](https://github.com/bitcoin/bips/blob/master/bip-0030.mediawiki) 并过渡到 LevelDB 解决了该问题。
 
 ### standardSQL
 ```sql

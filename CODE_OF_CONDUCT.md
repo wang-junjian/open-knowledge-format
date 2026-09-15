@@ -1,93 +1,93 @@
-# Code of Conduct
+# 行为准则
 
-## Our Pledge
+## 我们的承诺
 
-In the interest of fostering an open and welcoming environment, we as
-contributors and maintainers pledge to making participation in our project and
-our community a harassment-free experience for everyone, regardless of age, body
-size, disability, ethnicity, gender identity and expression, level of
-experience, education, socio-economic status, nationality, personal appearance,
-race, religion, or sexual identity and orientation.
+为了营造开放、欢迎的环境，作为贡献者与维护者的我们承诺：
+无论年龄、体型、
+残障、种族、性别认同与表达、
+经验水平、教育程度、社会经济地位、国籍、
+外貌、宗教，或性认同与性取向如何，任何人参与我们的项目与社区都应获得
+免受骚扰的体验。
 
-## Our Standards
+## 我们的标准
 
-Examples of behavior that contributes to creating a positive environment
-include:
+有助于营造积极环境的
+行为包括：
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+* 使用欢迎、包容的语言
+* 尊重不同的观点与经验
+* 优雅地接受建设性批评
+* 以社区的最佳利益为重
+* 对其他社区成员表达同理心
 
-Examples of unacceptable behavior by participants include:
+参与者不可接受的
+行为包括：
 
-* The use of sexualized language or imagery and unwelcome sexual attention or
-    advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic
-    address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a
-    professional setting
+* 使用带有性意味的语言或图像，以及不受欢迎的性关注或
+  性骚扰
+* 挑衅、侮辱/贬损性评论，以及人身或政治攻击
+* 公开或私下的骚扰
+* 未经明确许可，公开他人的私人信息，例如
+  实体或电子的住址
+* 其他在职业场合中可被合理认定为不当的
+  行为
 
-## Our Responsibilities
+## 我们的责任
 
-Project maintainers are responsible for clarifying the standards of acceptable
-behavior and are expected to take appropriate and fair corrective action in
-response to any instances of unacceptable behavior.
+项目维护者负责阐明可接受行为的标准，
+并在出现任何不可接受的行为时，
+采取恰当且公平的纠正措施。
 
-Project maintainers have the right and responsibility to remove, edit, or reject
-comments, commits, code, wiki edits, issues, and other contributions that are
-not aligned to this Code of Conduct, or to ban temporarily or permanently any
-contributor for other behaviors that they deem inappropriate, threatening,
-offensive, or harmful.
+项目维护者有权也有责任移除、编辑或拒绝不符合本行为准则的评论、提交、
+代码、wiki 编辑、issue 以及其他贡献，或出于他们认为不当、具威胁性、
+冒犯性或有害的其他行为，
+临时或永久封禁任何贡献者。
 
-## Scope
+## 适用范围
 
-This Code of Conduct applies both within project spaces and in public spaces
-when an individual is representing the project or its community. Examples of
-representing a project or community include using an official project e-mail
-address, posting via an official social media account, or acting as an appointed
-representative at an online or offline event. Representation of a project may be
-further defined and clarified by project maintainers.
+本行为准则适用于项目空间之内，
+也适用于个人代表项目或其社区出现在
+公共空间时。代表项目或社区的情形包括：使用项目官方邮箱地址、通过
+官方社交媒体账号发帖，或在线上或线下活动中担任指定代表。项目维护者
+可进一步界定和澄清「代表项目」的含义。
 
-This Code of Conduct also applies outside the project spaces when the Project
-Steward has a reasonable belief that an individual's behavior may have a
-negative impact on the project or its community.
+当项目管理者有合理理由相信
+某人的行为可能对项目或其社区产生负面影响时，
+本行为准则也适用于项目空间之外。
 
-## Conflict Resolution
+## 冲突解决
 
-We do not believe that all conflict is bad; healthy debate and disagreement
-often yield positive results. However, it is never okay to be disrespectful or
-to engage in behavior that violates the project’s code of conduct.
+我们并不认为所有冲突都是坏事；
+健康的辩论与分歧往往能带来积极成果。
+然而，任何时候都绝不应有不尊重的行为，
+也不应参与违反项目行为准则的
+行为。
 
-If you see someone violating the code of conduct, you are encouraged to address
-the behavior directly with those involved. Many issues can be resolved quickly
-and easily, and this gives people more control over the outcome of their
-dispute. If you are unable to resolve the matter for any reason, or if the
-behavior is threatening or harassing, report it. We are dedicated to providing
-an environment where participants feel welcome and safe.
+如果你看到有人违反行为准则，我们鼓励你直接与相关人员沟通其行为。
+许多问题可以快速、轻松地解决，
+这也能让当事人对争议结果拥有更多掌控。
+如果你因任何原因无法解决该问题，或者该行为具有威胁性或骚扰性，
+请举报。我们致力于提供一个让参与者感到受欢迎且
+安全的环境。
 
-Reports should be directed to @googleapis/senseai-eco, the
-Project Steward(s) for *Open Knowledge Format*. It is the Project Steward’s duty to
-receive and address reported violations of the code of conduct. They will then
-work with a committee consisting of representatives from the Open Source
-Programs Office and the Google Open Source Strategy team. If for any reason you
-are uncomfortable reaching out to the Project Steward, please email
-<opensource@google.com>.
+举报应提交给 @googleapis/senseai-eco，即 *Open Knowledge Format* 的
+项目管理者（Project Steward）。接收并处理被举报的违规行为是项目管理者的
+职责。随后他们将同由开源项目办公室（
+Open Source Programs Office）与
+Google 开源战略团队代表组成的委员会合作。
+如果你因任何原因不便联系
+项目管理者，请发送邮件至 <opensource@google.com>。
 
-We will investigate every complaint, but you may not receive a direct response.
-We will use our discretion in determining when and how to follow up on reported
-incidents, which may range from not taking action to permanent expulsion from
-the project and project-sponsored spaces. We will notify the accused of the
-report and provide them an opportunity to discuss it before any action is taken.
-The identity of the reporter will be omitted from the details of the report
-supplied to the accused. In potentially harmful situations, such as ongoing
-harassment or threats to anyone's safety, we may take action without notice.
+我们会调查每一份投诉，但你可能不会收到直接回复。我们将自行判断何时
+以及如何跟进被举报的事件，处置范围从不予处理到永久逐出项目及项目赞助的
+空间不等。在采取任何行动之前，我们会将举报内容告知被举报者，并为其提供
+说明的机会。提供给被举报者的举报详情中将隐去举报人身份。
+在可能有害的情形下，
+例如持续的骚扰或对任何人安全的威胁，
+我们可在不预先通知的情况下采取行动。
 
-## Attribution
+## 归属
 
-This Code of Conduct is adapted from the Contributor Covenant, version 1.4,
-available at
+本行为准则改编自 Contributor Covenant 1.4 版，
+地址为
 <https://www.contributor-covenant.org/version/1/4/code-of-conduct.html>

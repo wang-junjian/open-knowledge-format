@@ -1,6 +1,6 @@
 # BigQuery Table
 
-* [Bitcoin Blocks Table](blocks.md) - All blocks from the Bitcoin blockchain, including block headers, transaction counts, sizes, and timestamps.
-* [Bitcoin Outputs Table](outputs.md) - Outputs from all Bitcoin transactions, including script details and values in Satoshis.
-* [Bitcoin Transaction Inputs](inputs.md) - Bitcoin transaction inputs detailing UTXOs spent.
-* [Bitcoin Transactions Table](transactions.md) - All Bitcoin transactions containing inputs, outputs, block metadata, and fee structures.
+* [比特币区块表](blocks.md) - 比特币区块链的全部区块，包含区块头、交易数量、大小与时间戳。
+* [比特币输出表](outputs.md) - 全部比特币交易的输出，包含脚本明细与以 Satoshis 计的金额。
+* [比特币交易输入](inputs.md) - 比特币交易输入，详述所花费的 UTXO。
+* [比特币交易表](transactions.md) - 全部比特币交易，包含输入、输出、区块元数据与手续费结构。
